@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Blog | Home</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  <%- include("_header.ejs") %> 
+  <div class="wrapper">
+        <% for( let i = 0; i < articles.length; i++ ) { %>
+          <div class="flex article-list">
+            <img class="article-img" src= <%= "data:" + articles[i].featureImage.mimetype + ";base64," + articles[i].featureImage.base64 %> alt="<%= articles[i].originalname %>">
+            <div class="article-item">
+              <h2><a href="/article/<%= articles[i].id %>"><%= articles[i].title %></a></h2>
+              <p><%= articles[i].description.slice(0, 500) + "..." %> </p>
+              <a href="/article/<%= articles[i].id %>">Read More</a>
+            </div>
+          </div>
+        <% } %>
+    </div>
+</body>
+</html>

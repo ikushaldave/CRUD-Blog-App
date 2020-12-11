@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= article.title %> </title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  <%- include("_header.ejs") %> 
+  <main>
+    <div class="container center">
+      <div class="breadcrumb align-left">
+        <h4><a href="/">HOME</a> / BLOG</a></h4>
+      </div>
+      <h1><%= article.title %></h1>
+      <span>Posted on - <%= article.updatedAt.toISOString().split("T")[0] %> </span>
+      <figure>
+        <img class="article-image" src="<%= "data:" + article.featureImage.mimetype + ";base64," + article.featureImage.base64 %>" alt="<%= article.featureImage.originalname %>">
+        <figcaption><%= article.featureImage.originalname %></figcaption>
+      </figure>
+      <p class="article-desc"><%= article.description %> </p>
+      <div class="social align-left">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= "http://localhost:3000/" + article.id %>" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= "http://localhost:3000/" + article.id %>" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= "http://localhost:3000/" + article.id %>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="container">
+      <h3>COMMENTS -</h3>
+      <div class="comment-form">
+        <form action="/article/<%= article.id %>/comment" method="post">
+          <label>Name:
+            <input type="text" name="name" placeholder="Enter Name">
+          </label>
+          <label>Email:
+            <input type="email" name="email" placeholder="Enter Email">
+          </label>
+          <label> Comment:
+            <textarea name="comment" cols="30" rows="5"></textarea>
+          </label>
+          <input type="submit" value="Submit">
+        </form>
+        <div class="comments">
+          <% article.comments.forEach(comment => { %>
+            <div class="comment" id="<%= comment.id %> ">
+              <h4>By <%= comment.name %></h4>
+              <h6><%= comment.comment %> by <span><%= comment.name %></span></h6>
+              <div class="flex reaction">
+                <div class="imoji">
+                  <i class="fad fa-thumbs-up"></i>
+                  <i class="fal fa-smile-wink"></i>
+                  <i class="fal fa-smile-beam"></i>
+                  <i class="fal fa-smile-beam"></i>
+                  <i class="far fa-grin-tongue-wink"></i>
+                  <i class="fas fa-grin-hearts"></i>
+                  <i class="far fa-grimace"></i>
+                </div>
+                <h5 class="reply"><i class="fas fa-reply"></i> reply</h5>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/scripts/main.js"></script>
+</body>
+</html>

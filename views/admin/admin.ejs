@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Blog | admin</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body class="admin">
+  
+  <%- include("./_header.ejs"); %>
+  <main>
+    <div class="container flex">
+
+      <%- include("./_nav.ejs")  %> 
+      
+      <div class="col-75">
+        <h3 class="center">Articles</h3>
+        <div class="wrapper">
+          <% for( let i = 0; i < articles.length; i++ ) { %>
+            <div class="flex article-list">
+              <img class="small-img" src= <%= "data:" + articles[i].featureImage.mimetype + ";base64," + articles[i].featureImage.base64 %> alt="<%= articles[i].originalname %>">
+              <div class="article-item">
+                <h5><a href="/article/<%= articles[i].id %>" target="_blank"><%= articles[i].title %></a></h5>
+                <p><%= articles[i].description.slice(0, 200) + "..." %> </p>
+                <span class="updated-at">Updated - <%= articles[i].updatedAt.toISOString().split("T")[0] %> </span>
+              </div>
+              <div class="flex updation">
+                <a href="/admin/articles/<%= articles[i].id %>/edit ">Edit</a>
+                <a href="/admin/articles/<%= articles[i].id %>/delete ">Delete</a>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
