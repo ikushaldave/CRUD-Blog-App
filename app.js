@@ -11,6 +11,7 @@ const MongoStore = require("connect-mongo")(session);
 const index = require("./routes/index");
 const admin = require("./routes/admin/admin")
 const article = require("./routes/article");
+const auth = require("./middlewares/auth")
 
 // Connection with DB
 
@@ -26,7 +27,8 @@ const app = express()
 
 app.use(logger("dev"))
 app.use(
-	session({
+  session({
+    name: "SID",
     secret: "G#gYeIwpT%*pc@xYMiyG1x6HB&1laDI9Iq5fk^T9!VedLPJa9ngcX6c@u0@CnGFoeFVj@Ze8eyXLPWdN4^VEc17U5hbHtKvo@WMg",
     saveUninitialized: false,
     resave: false,
@@ -45,7 +47,7 @@ app.set("views", path.join(__dirname, "views"))
 // Routing Middleware
 
 app.use("/", index)
-app.use("/admin", admin)
+app.use("/admin", auth.verifyUserLoggedIn, admin)
 app.use("/article", article) 
 
 // Error Handling

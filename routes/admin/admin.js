@@ -19,14 +19,10 @@ const upload = multer({ storage });
 // GET "/admin/articles" -> List all articles created by admin (both draft and published)
 
 router.get("/articles", (req, res, next) => {
-  if (req.session && req.session.userID) {
-    Article.find({}, (err, articles) => {
-      if (err) return next(err);
-      res.render("admin/admin", { articles });
-    });
-  } else {
-    return next("Access Denied");
-  }
+  Article.find({}, (err, articles) => {
+    if (err) return next(err);
+    res.render("admin/admin", { articles });
+  });
 })
 
 // GET "/admin/articles/new" -> Render a form for creating a new Article

@@ -3,6 +3,8 @@ const router = express.Router();
 const Article = require("../models/Article");
 const User = require("../models/User");
 
+const auth = require("../middlewares/auth")
+
 // GET "/" -> Home Page of Articles
 
 router.get("/", (req, res, next) => {
@@ -15,6 +17,9 @@ router.get("/", (req, res, next) => {
 // GET "/login" -> Login Page for register
 
 router.get("/login", (req, res, next) => {
+  if (req.session && req.session.userID) {
+    res.redirect("/admin/articles")
+  }
   res.render("login")
 })
 
@@ -38,6 +43,9 @@ router.post("/login", (req, res, next) => {
 // GET "/register" -> User Register Page
 
 router.get("/register", (req, res, next) => {
+  if (req.session && req.session.userID) {
+		res.redirect("/admin/articles");
+  }
   res.render("register");
 })
 
@@ -57,6 +65,7 @@ router.get("/logout", (req, res, next) => {
     if (err) return next(err)
     res.redirect("/")
   })
+  res.clearCookie("SID")
 })
 
 module.exports = router;

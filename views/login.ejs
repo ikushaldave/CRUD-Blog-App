@@ -7,15 +7,18 @@
   <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body class="login">
-  <h3 class="center">LOGIN</h3>
-  <div class="container flex flex-center">
-    <form action="/login" method="POST" class="login-form">
-      <label for="email">Email: </label>
-      <input type="email" name="email" id="email" placeholder="Enter Email" required>
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password" placeholder="Enter Password" required>
-      <input type="submit" value="SUBMIT">
-    </form>
+  <%- include("_header") %>
+  <div class="container">
+    <h3 class="center">LOGIN</h3>
+    <div class="flex flex-center">
+      <form action="/login" method="POST" class="login-form">
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" placeholder="Enter Email" required>
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" placeholder="Enter Password" required>
+        <input type="submit" value="SUBMIT">
+      </form>
+    </div>
   </div>
 </body>
 </html>
