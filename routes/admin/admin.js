@@ -16,23 +16,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// POST "/admin" -> auth of admin
-
-router.all("/", (req, res, next) => {
-  if (req.body.email == "admin@xyz.com" && req.body.password == "admin@123") {
-    res.redirect("/admin/articles")
-  } else {
-    res.render("login")
-  }
-})
-
 // GET "/admin/articles" -> List all articles created by admin (both draft and published)
 
 router.get("/articles", (req, res, next) => {
-  Article.find({}, (err, articles) => {
-		if (err) return next(err);
-		res.render("admin/admin", { articles });
-  });
+  if (req.session && req.session.userID) {
+    Article.find({}, (err, articles) => {
+      if (err) return next(err);
+      res.render("admin/admin", { articles });
+    });
+  } else {
+    return next("Access Denied");
+  }
 })
 
 // GET "/admin/articles/new" -> Render a form for creating a new Article

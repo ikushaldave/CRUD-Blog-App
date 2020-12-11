@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Blog | Register</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  <%- include("_header") %>
+  <main>
+    <div class="container">
+      <h3 class="center">Register</h3>
+      <form action="/register" method="post" class="register">
+        <label>First Name:
+          <input type="text" name="firstName" placeholder="Enter First Name">
+        </label>
+        <label>Last Name:
+          <input type="text" name="lastName" placeholder="Enter Last Name">
+        </label>
+        <label>Email:
+          <input type="email" name="email" placeholder="Enter Email">
+        </label>
+        <label>Password:
+          <input type="password" name="password" placeholder="Enter password">
+        </label>
+        <label>Retype Password:
+          <input type="password" name="repassword" placeholder="Retype password">
+        </label>
+        <input type="submit" value="Register">
+      </form>
+    </div>
+  </main>
+</body>
+</html>

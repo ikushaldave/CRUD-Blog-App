@@ -336,3 +336,12 @@ header {
   margin: 1rem;
   color: blueviolet;
 }
+
+.register {
+  max-width: 50%;
+  margin: 2rem auto;
+}
+
+.error {
+  margin: 2rem;
+}

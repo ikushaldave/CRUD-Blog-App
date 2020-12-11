@@ -5,10 +5,12 @@ const mongoose = require("mongoose");
 const path = require("path")
 const logger = require("morgan");
 const log = require("log-beautify");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 const index = require("./routes/index");
 const admin = require("./routes/admin/admin")
-const article = require("./routes/article")
+const article = require("./routes/article");
 
 // Connection with DB
 
@@ -23,6 +25,17 @@ const app = express()
 // Middleware
 
 app.use(logger("dev"))
+app.use(
+	session({
+    secret: "G#gYeIwpT%*pc@xYMiyG1x6HB&1laDI9Iq5fk^T9!VedLPJa9ngcX6c@u0@CnGFoeFVj@Ze8eyXLPWdN4^VEc17U5hbHtKvo@WMg",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 300000
+    },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+	})
+);
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static("./pubic"))
 
