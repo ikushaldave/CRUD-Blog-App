@@ -1,6 +1,6 @@
 # Simple CRUD App
 
-This is Simple CRUD Blog App Created during Learning of Express & Mongoose
+This is Simple CRUD Blog App Created during Learning of Express, Mongoose, Authentication and Authorization
 
 ## Routes Available
 
@@ -12,9 +12,9 @@ This is Simple CRUD Blog App Created during Learning of Express & Mongoose
 
 ### Admin
 
-- `/admin` (Fake Admin Login) 
+- `/admin` (Now Any Resgister User Can Do CRUD Operation)
 
-  (Email: admin@xyz.com & Password: admin@xyz)
+  Note - The authenticated user can do CRUD operation and it can also able to CRUD operation on others people posted (Will be Fix Soon)
 
 - `/admin/articles` (Show All Articles Post By Admin)
 
