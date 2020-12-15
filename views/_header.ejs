@@ -1,6 +1,10 @@
 <header>
   <div class="container flex nav">
     <h2><a href="/">Personal Blog</a></h2>
-    <h6><a href="/login">Login</a> / <a href="/register">Register</a></h6>
+    <% if (user) { %>
+      <h6><a href="/admin/articles">Admin</a> / <a href="/logout">Logout</a></h6>
+      <% } else { %>
+        <h6><a href="/register">Register</a> / <a href="/login">Login</a></h6>
+      <% } %> 
   </div>
 </header>

@@ -33,13 +33,14 @@ app.use(
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 300000
+      maxAge: 60480000
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 	})
 );
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static("./pubic"))
+app.use(auth.currentLoggedUserInfo)
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"))

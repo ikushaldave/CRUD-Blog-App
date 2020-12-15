@@ -18,7 +18,13 @@ const commentSchema = new Schema({
   },
   articleId: {
     type: Schema.Types.ObjectId,
+    required: true,
     ref: "Article"
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "User"
   }
 })
 

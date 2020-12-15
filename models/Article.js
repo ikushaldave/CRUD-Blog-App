@@ -24,8 +24,14 @@ const articleSchema = new Schema(
 		},
 		comments: [{
 			type: Schema.Types.ObjectId,
+			required: true,
 			ref: "Comment"
-		}]
+		}],
+		userId: {
+			type: Schema.Types.ObjectId,
+			required: true,
+			ref: "User"
+		}
 	},
 	{ timestamps: true }
 );

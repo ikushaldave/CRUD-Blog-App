@@ -1,5 +1,6 @@
 <header>
-  <div class="container">
-    <h2><a href="/admin/articles">Welcome Admin</a></h2>
+  <div class="container flex nav">
+    <h2><a href="/">Personal Blog</a></h2>
+    <h2><a href="/admin/articles">Welcome, <%= `${user.firstName} ${user.lastName}` %> </a></h2>
   </div>
 </header>
