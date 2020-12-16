@@ -12,6 +12,7 @@ const index = require("./routes/index");
 const admin = require("./routes/admin/admin");
 const article = require("./routes/article");
 const auth = require("./middlewares/auth");
+const port = process.env.PORT || 3000;
 require("dotenv").config();
 
 // Connection with DB
@@ -64,6 +65,6 @@ app.use((err, req, res, next) => {
 
 // Listening
 
-app.listen(3000, () => {
-  log.info("Server is running on PORT 3000")
+app.listen(port, () => {
+  log.info(`Server is running on PORT ${port}`)
 })
