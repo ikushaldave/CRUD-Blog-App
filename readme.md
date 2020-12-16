@@ -2,6 +2,10 @@
 
 This is Simple CRUD Blog App Created during Learning of Express, Mongoose, Authentication and Authorization
 
+Check `.env.sample` and replace with proper info and rename it `.env`
+
+[Live Link](https://personal-blog-crud.herokuapp.com/)
+
 ## Routes Available
 
 ### General
@@ -12,9 +16,7 @@ This is Simple CRUD Blog App Created during Learning of Express, Mongoose, Authe
 
 ### Admin
 
-- `/admin` (Now Any Resgister User Can Do CRUD Operation)
-
-  Note - The authenticated user can do CRUD operation and it can also able to CRUD operation on others people posted (Will be Fix Soon)
+- `/admin` (Now Any Register User Can Do CRUD Operation)
 
 - `/admin/articles` (Show All Articles Post By Admin)
 
