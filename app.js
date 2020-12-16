@@ -2,21 +2,22 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path")
+const path = require("path");
 const logger = require("morgan");
 const log = require("log-beautify");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 const index = require("./routes/index");
-const admin = require("./routes/admin/admin")
+const admin = require("./routes/admin/admin");
 const article = require("./routes/article");
-const auth = require("./middlewares/auth")
+const auth = require("./middlewares/auth");
+require("dotenv").config();
 
 // Connection with DB
 
-mongoose.connect("mongodb://localhost:27017/personalBlog", { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-	err ? log.error(err) : log.ok("Connected to DB")
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/personalBlog?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+	err ? log.error(err) : log.ok("Connected to DB");
 });
 
 // Express app
