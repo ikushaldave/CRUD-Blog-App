@@ -17,7 +17,7 @@ require("dotenv").config();
 
 // Connection with DB
 
-mongoose.connect(`mongodb://localhost:27017/personalBlog`, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/personalBlog?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 	err ? log.error(err) : log.ok("Connected to DB");
 });
 
