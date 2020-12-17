@@ -12,15 +12,8 @@ const articleSchema = new Schema(
 			minlength: 50,
 		},
 		featureImage: {
-			fieldname: String,
-			originalname: String,
-			encoding: String,
-			mimetype: String,
-			destination: String,
-			filename: String,
-			path: String,
-      size: Number,
-      base64: String
+			type: String,
+			required: true
 		},
 		comments: [{
 			type: Schema.Types.ObjectId,

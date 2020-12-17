@@ -6,15 +6,15 @@ const path = require("path");
 const Article = require("../../models/Article");
 
 const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, "uploads/");
-	},
-	filename: function (req, file, cb) {
-		cb(null, file.fieldname + "-" + Date.now() + `.${file.mimetype.split("/").pop()}`);
-	},
-});
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads")
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
+})
 
-const upload = multer({ storage });
+const upload = multer({ storage })
 
 // GET "/admin/articles" -> List all articles created by admin (both draft and published)
 
@@ -34,17 +34,12 @@ router.get("/articles/new", (req, res, next) => {
 // POST /admin/articles/article
 
 router.post("/articles/article/", upload.single("featureImage"), (req, res, next) => {
-  
-  if (req.file) {
-    const base64 = fs.readFileSync(path.join(__dirname, `../../uploads/${req.file.filename}`), { encoding: "base64" })
-    req.file.base64 = base64
-  }
-
+  console.log(req.file)
   Article.create({
     title: req.body.title,
     description: req.body.description,
-    featureImage: req.file,
-    userId: req.session.userID
+    featureImage: req.file.filename,
+    userId: req.user.id
   }, (err, article) => {
       if (err) return next(err);
       res.redirect("/admin/articles")

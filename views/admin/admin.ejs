@@ -19,7 +19,7 @@
         <div class="wrapper">
           <% for( let i = 0; i < articles.length; i++ ) { %>
             <div class="flex article-list">
-              <img class="small-img" src= <%= "data:" + articles[i].featureImage.mimetype + ";base64," + articles[i].featureImage.base64 %> alt="<%= articles[i].originalname %>">
+              <img class="small-img" src= <%= `/uploads/${articles[i].featureImage}` %> alt="<%= articles[i].originalname %>">
               <div class="article-item">
                 <h5><a href="/article/<%= articles[i].id %>" target="_blank"><%= articles[i].title %></a></h5>
                 <p><%= articles[i].description.slice(0, 200) + "..." %> </p>
