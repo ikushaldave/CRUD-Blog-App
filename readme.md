@@ -14,17 +14,17 @@ Check `.env.sample` and replace with proper info and rename it `.env`
 
 - `/:id` (View Individual Article)
 
-### Admin
+### User DashBoard
 
-- `/admin` (Now Any Register User Can Do CRUD Operation)
+- `/user` (Now Any Register User Can Do CRUD Operation)
 
-- `/admin/articles` (Show All Articles Post By Admin)
+- `/user/dashboard` (Show All dashboard Post By user)
 
-- `/admin/articles/new` (Creating New Article)
+- `/user/dashboard/new` (Creating New Article)
 
-- `/admim/articles/:id/edit` (To Edit a Posted Article)
+- `/user/dashboard/:id/edit` (To Edit a Posted Article)
 
-- `/admin/articles/:id/delete` (To Delete an Article)
+- `/user/dashboard/:id/delete` (To Delete an Article)
 
 ## Use
 

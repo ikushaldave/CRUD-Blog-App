@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-// GET "/admin/dashboard" -> List all articles created by admin
+// GET "/user/dashboard" -> List all articles created by user
 
 router.get("/dashboard", (req, res, next) => {
   console.log("Hello")
@@ -27,13 +27,13 @@ router.get("/dashboard", (req, res, next) => {
   });
 })
 
-// GET "/admin/dashboard/new" -> Render a form for creating a new Article
+// GET "/user/dashboard/new" -> Render a form for creating a new Article
 
 router.get("/dashboard/new", (req, res, next) => {
   res.render("userDashboard/new");
 })
 
-// POST /admin/dashboard/article
+// POST /user/dashboard/article
 
 router.post("/dashboard/article/", upload.single("featureImage"), (req, res, next) => {
   Article.create({
@@ -47,7 +47,7 @@ router.post("/dashboard/article/", upload.single("featureImage"), (req, res, nex
   })
 })
 
-// GET "/admin/dashboard/:id/edit" -> edit a article
+// GET "/user/dashboard/:id/edit" -> edit a article
 
 router.get("/dashboard/:id/edit", (req, res, next) => {
   Article.findById(req.params.id, (err, article) => {
@@ -60,7 +60,7 @@ router.get("/dashboard/:id/edit", (req, res, next) => {
   })
 })
 
-// Updating Article
+// POST "/user/dashboard/:id/edit" -> Updating Article
 
 router.post("/dashboard/:id/update", upload.single("featureImage"), (req, res, next) => {
 
