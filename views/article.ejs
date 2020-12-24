@@ -17,7 +17,7 @@
       <h1><%= article.title %></h1>
       <span>Posted on - <%= article.updatedAt.toISOString().split("T")[0] %> </span>
       <figure>
-        <img class="article-image" src=<%= `/uploads/${article.featureImage}` %> >
+        <img class="article-image" src="<%= `/uploads/${article.featureImage}` %>" >
         <figcaption><%= article.featureImage.originalname %></figcaption>
       </figure>
       <p class="article-desc"><%= article.description %> </p>

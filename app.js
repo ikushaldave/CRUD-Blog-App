@@ -9,11 +9,14 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 const index = require("./routes/index");
-const admin = require("./routes/admin/admin");
+const userDashboard = require("./routes/userDashboard/user");
 const article = require("./routes/article");
 const auth = require("./middlewares/auth");
+const passport = require("passport");
 const port = process.env.PORT || 3000;
+
 require("dotenv").config();
+require("./config/passport")
 
 // Connection with DB
 
@@ -31,9 +34,9 @@ app.use(logger("dev"))
 app.use(
   session({
     name: "SID",
-    secret: "G#gYeIwpT%*pc@xYMiyG1x6HB&1laDI9Iq5fk^T9!VedLPJa9ngcX6c@u0@CnGFoeFVj@Ze8eyXLPWdN4^VEc17U5hbHtKvo@WMg",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
-    resave: false,
+    resave: true,
     cookie: {
       maxAge: 60480000
     },
@@ -41,8 +44,10 @@ app.use(
 	})
 );
 app.use(express.urlencoded({ extended: false }))
+app.use(passport.initialize())
 app.use(express.static("./public"))
-app.use(auth.currentLoggedUserInfo)
+app.use(passport.session())
+app.use(auth.currentLoggedUserInfo);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"))
@@ -50,7 +55,7 @@ app.set("views", path.join(__dirname, "views"))
 // Routing Middleware
 
 app.use("/", index)
-app.use("/admin", auth.verifyUserLoggedIn, admin)
+app.use("/user", auth.verifyUserLoggedIn, userDashboard)
 app.use("/article", article) 
 
 // Error Handling

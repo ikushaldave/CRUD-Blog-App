@@ -4,6 +4,7 @@ const Article = require("../models/Article");
 const User = require("../models/User");
 
 const auth = require("../middlewares/auth")
+const passport = require("passport")
 
 // GET "/" -> Home Page of Articles
 
@@ -18,7 +19,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/login", (req, res, next) => {
   if (req.session && req.session.userID) {
-    res.redirect("/admin/articles")
+    res.redirect("/user/dashboard")
   }
   res.render("login")
 })
@@ -31,8 +32,8 @@ router.post("/login", (req, res, next) => {
     if (err) return next(err);
     if(!user) return res.redirect("/login")
     if (user.verifyPassword(password)) {
-      req.session.userID = user.id
-        res.redirect("/admin/articles");
+      req.session.user = user.id
+        res.redirect("/user/dashboard");
       } else {
         res.redirect("/login");
     }
@@ -44,7 +45,7 @@ router.post("/login", (req, res, next) => {
 
 router.get("/register", (req, res, next) => {
   if (req.session && req.session.userID) {
-		res.redirect("/admin/articles");
+		res.redirect("/user/dashboard");
   }
   res.render("register");
 })
@@ -52,7 +53,15 @@ router.get("/register", (req, res, next) => {
 // POST "/register" -> Create a New User
 
 router.post("/register", (req, res, next) => {
-  User.create(req.body, (err, user) => {
+  User.create({
+    email: req.body.email,
+    name: `${req.body.firstName} ${req.body.lastName}`,
+    local: {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: req.body.password
+    }
+  }, (err, user) => {
     if (err) return next(err);
     res.redirect("/login")
   })
@@ -67,5 +76,17 @@ router.get("/logout", (req, res, next) => {
   })
   res.clearCookie("SID")
 })
+
+// GET "/auth/github"
+
+router.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
+
+// GET "/auth/github/callback"
+
+router.get(
+	"/auth/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login" }), function (req, res) {
+    res.redirect("/user/dashboard");
+});
 
 module.exports = router;
